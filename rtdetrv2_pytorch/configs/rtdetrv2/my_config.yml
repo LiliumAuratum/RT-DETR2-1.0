@@ -1,0 +1,9 @@
+__include__: [
+  '../dataset/my_dataset.yml',
+  '../runtime.yml',
+  'include/dataloader.yml',
+  'include/optimizer.yml',
+  'include/rtdetr_r50vd.yml',
+]
+
+output_dir: ./output/my_rtdetrv2_model

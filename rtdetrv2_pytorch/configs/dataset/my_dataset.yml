@@ -1,0 +1,40 @@
+task: detection
+num_classes: 1  # ← 自分のクラス数に変更
+remap_mscoco_category: False  # ← COCO形式でないならFalse推奨
+
+train_dataloader:
+  type: DataLoader
+  dataset:
+    type: CocoDetection
+    img_folder: /home/usrs/yuriya/datasets/cocodata/train2017/
+    ann_file: /home/usrs/yuriya/datasets/cocodata/annotations/custom_train.json
+    transforms:
+      type: Compose
+      ops:
+        - Decode: {}
+        - Resize: {target_size: [640, 640]}
+        - RandomFlip: {}
+        - NormalizeImage: {is_scale: true, mean: [123.675, 116.28, 103.53], std: [58.395, 57.12, 57.375]}
+        - Permute: {}
+  shuffle: True
+  batch_size: 8
+  num_workers: 4
+  drop_last: True
+
+val_dataloader:
+  type: DataLoader
+  dataset:
+    type: CocoDetection
+    img_folder: /home/usrs/yuriya/datasets/cocodata/val2017/
+    ann_file: /home/usrs/yuriya/datasets/cocodata/annotations/custom_val.json
+    transforms:
+      type: Compose
+      ops:
+        - Decode: {}
+        - Resize: {target_size: [640, 640]}
+        - NormalizeImage: {is_scale: true, mean: [123.675, 116.28, 103.53], std: [58.395, 57.12, 57.375]}
+        - Permute: {}
+  shuffle: False
+  batch_size: 8
+  num_workers: 4
+  drop_last: False
