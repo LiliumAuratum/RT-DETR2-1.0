@@ -1,6 +1,6 @@
 task: detection
 num_classes: 1  # ← 自分のクラス数に変更
-remap_mscoco_category: False  # ← COCO形式でないならFalse推奨
+remap_mscoco_category: True  # ← COCO形式でないならFalse推奨
 
 train_dataloader:
   type: DataLoader
